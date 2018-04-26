@@ -20,6 +20,14 @@ class App < Sinatra::Base
 			session[:error] = nil
 			return error
 		end
+
+		get('/notes') do
+			db = SQLite3::Database.new('db/db.db')
+			user = db.execute("SELECT * FROM users WHERE id=?", session[:user_id])
+			p user
+			slim(:notes, locals:{session:session, user:user})
+		end
+		
 		post('/register') do
 			db = SQLite3::Database.new('db/db.db')
 			db.results_as_hash = true
@@ -70,4 +78,6 @@ class App < Sinatra::Base
 				redirect('/error')
 			end
 		end
+
+		
 	end
