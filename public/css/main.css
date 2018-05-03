@@ -4,7 +4,11 @@ body{
     background-color:rgb(78, 78, 78);
     align-items: center;
 }
-
+a {
+    text-decoration: none;
+    color: black;
+    background-color: rgb(146, 146, 146);
+}
 .list{
     display: flex;
     flex-direction: column;
