@@ -23,14 +23,19 @@ class App < Sinatra::Base
 
 		get('/notes') do
 			db = SQLite3::Database.new('db/db.db')
+			if session[:user_id]
 			user = db.execute("SELECT * FROM users WHERE id=?", session[:user_id])
 			lists = db.execute("SELECT * FROM listor WHERE user_id=?", session[:user_id])
 			list_items = db.execute("SELECT * FROM list_objekt WHERE user_id=?", session[:user_id])
 			slim(:notes, locals:{session:session, user:user, lists:lists, list_items:list_items})
+			else
+				redirect("/")
+			end
 		end
 		post('/note') do
 			db = SQLite3::Database.new('db/db.db')
-			db.execute("INSERT INTO list_objekt (namn, lista, mängd, user_id) VALUES(?,?,?,?)",[params[:list_item],params[:lista], params[:ammount], session[:user_id] ] )
+			p params[:amount]
+			db.execute("INSERT INTO list_objekt (namn, lista, mängd, user_id) VALUES(?,?,?,?)",[params[:list_item],params[:lista], params[:amount], session[:user_id] ] )
 			redirect("/notes")
 		end
 		post("/add_list") do
@@ -97,6 +102,12 @@ class App < Sinatra::Base
 		post('/delete_list') do
 			db = SQLite3::Database.new('db/db.db')
 			db.execute("DELETE FROM listor WHERE id=?", params[:id])
+			db.execute("DELETE FROM list_objekt WHERE lista=?", params[:lista])
 			redirect('/notes')
 		end
+		get('/logout') do
+			session[:user_id] = nil
+			redirect("/")
+		end
+	
 	end

@@ -1,15 +1,16 @@
 body{
     display: flex;
     flex-direction: column;
-    background-color:green;
+    background-color:rgb(78, 78, 78);
     align-items: center;
 }
 
 .list{
-    background-color: rgb(216, 192, 255);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
+    font-size: 50px;
+    color: white;
 
 }
 .item{
@@ -18,11 +19,45 @@ body{
 
 }
 .kim{
-    background-color: red;
-    margin-right: 600px;
-    font-size: 60px;
+    margin-right: 300px;
+    
 }
-.kimt{
-    font-size: 60px;
-    background-color: red;
+.reg{
+display: flex;
+align-items: center;
+flex-direction: column;
+margin-top: 30%;
+background-color: grey;
+height: 300px;
+width: 500px;
+
+}
+.back{
+    font-size: 50px;
+}
+.reg2{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+.allt{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30%;
+    background-color: grey;
+    height: 100%;
+    width: 600px;
+}
+.bort{
+    margin-left: 50px;
+}
+.lists{
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+}
+h1{
+font-size: 50px;
 }

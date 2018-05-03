@@ -1,29 +1,31 @@
 H1 Hello #{user[0][0]}
+a href="/logout" Logout
+div class="allt"
+    form.login-form action="/note" class="tja" method="post" 
+        input type="text" name="list_item" placeholder="Varor"
+        select name="lista"
+            -lists.each do |list|
+                option value="#{list[1]}" name="#{list[1]}" id="#{list[1]}"
+                    label for="#{list[1]}" #{list[1]}
+        input type="text" name="amount" placeholder="Antal"
+        input type="submit" value="Lägg till"
+    form action="/add_list" method="post"
+        input type="text" name="list_name" placeholder="Ny lista"
+        input type="submit" value="Lägg till lista"
 
-form.login-form action="/note" method="post"
-    input type="text" name="list_item" placeholder="Varor"
-    select name="lista"
-        -lists.each do |list|
-            option value="#{list[1]}" name="#{list[1]}" id="#{list[1]}"
-                label for="#{list[1]}" #{list[1]}
-    input type="text" name="amount" placeholder="Antal"
-    input type="submit" value="Lägg till"
-form action="/add_list" method="post"
-    input type="text" name="list_name" placeholder="Ny lista"
-    input type="submit" value="Lägg till lista"
-
-.lists 
-    - lists.each do |list|
-        h1 =list[1]
-        form action="/delete_list" method="post"
-                            input type="hidden"  value="#{list[0]}" name="id"
-                            input type="submit" value="x"
-        .list 
-            -list_items.each do |item|
-                -if item[2] == list[1]
-                    .item 
-                        p.kim =item[1]
-                        p =item[3]
-                        form action="/delete_thing" method="post"
-                            input type="hidden"  value="#{item[0]}" name="id"
-                            input type="submit" value="x"
+    .lists 
+        - lists.each do |list|
+            h1 =list[1]
+            form action="/delete_list" method="post"
+                                input type="hidden"  value="#{list[0]}" name="id"
+                                input type="hidden"  value="#{list[1]}" name="lista"
+                                input type="submit" value="x"
+            .list 
+                -list_items.each do |item|
+                    -if item[2] == list[1]
+                        .item 
+                            p.kim =item[1]
+                            p =item[3]
+                            form action="/delete_thing" class="bort" method="post"
+                                input type="hidden"  value="#{item[0]}" name="id"
+                                input type="submit" value="x"
