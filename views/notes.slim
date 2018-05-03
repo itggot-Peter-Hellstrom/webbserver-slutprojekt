@@ -15,9 +15,15 @@ form action="/add_list" method="post"
 .lists 
     - lists.each do |list|
         h1 =list[1]
+        form action="/delete_list" method="post"
+                            input type="hidden"  value="#{list[0]}" name="id"
+                            input type="submit" value="x"
         .list 
             -list_items.each do |item|
                 -if item[2] == list[1]
                     .item 
-                        p =item[1]
+                        p.kim =item[1]
                         p =item[3]
+                        form action="/delete_thing" method="post"
+                            input type="hidden"  value="#{item[0]}" name="id"
+                            input type="submit" value="x"

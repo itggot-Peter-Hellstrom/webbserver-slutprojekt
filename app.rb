@@ -89,6 +89,14 @@ class App < Sinatra::Base
 				redirect('/error')
 			end
 		end
-
-		
+		post('/delete_thing') do
+			db = SQLite3::Database.new('db/db.db')
+			db.execute("DELETE FROM list_objekt WHERE id=?", params[:id])
+			redirect('/notes')
+		end
+		post('/delete_list') do
+			db = SQLite3::Database.new('db/db.db')
+			db.execute("DELETE FROM listor WHERE id=?", params[:id])
+			redirect('/notes')
+		end
 	end
